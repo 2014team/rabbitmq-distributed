@@ -1,0 +1,9 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: business
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848

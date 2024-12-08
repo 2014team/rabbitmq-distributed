@@ -1,0 +1,19 @@
+server:
+  port: 8080
+####nacos配置
+spring:
+  application:
+    name: makeorder
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbitmq
+    password: rabbitmq
+    virtual-host: rabbitmq
+    publisher-confirm-type: correlated #发送失败消息标识
+    publisher-returns: true  #return机制开启

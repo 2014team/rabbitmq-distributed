@@ -17,3 +17,10 @@ spring:
     virtual-host: rabbitmq
     publisher-confirm-type: correlated #发送失败消息标识
     publisher-returns: true  #return机制开启
+
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/rabbitmq?useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver

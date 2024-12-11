@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class StockController {
 
-    private static int stock = 10;
+    private static int stock = 10000;
 
     @GetMapping("/decr")
     public void decr() throws InterruptedException {

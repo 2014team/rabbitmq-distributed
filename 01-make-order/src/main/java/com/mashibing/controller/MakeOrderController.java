@@ -73,6 +73,7 @@ public class MakeOrderController {
         String id = UUID.randomUUID().toString();
         // 封装消息的全部信息
         Map map = new HashMap<>();
+        map.put("id",id);
         map.put("message",userAndOrderInfo);
         map.put("exchange",RabbitMQConfig.PLACE_ORDER_EXCHANGE);
         map.put("routingKey","");

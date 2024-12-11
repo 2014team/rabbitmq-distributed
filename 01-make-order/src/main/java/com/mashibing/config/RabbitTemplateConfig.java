@@ -1,17 +1,26 @@
 package com.mashibing.config;
 
 
+import com.mashibing.mapper.ResentMapper;
+import com.mashibing.util.GlobalCache;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.Map;
 
 @Configuration
 @Slf4j
 public class RabbitTemplateConfig {
+
+    @Autowired
+    ResentMapper resentMapper;
+
 
     @Bean
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory){
@@ -37,8 +46,16 @@ public class RabbitTemplateConfig {
                 String msgId = correlationData.getId();
                 if(ack){
                     log.info("消息发送到Exchange成功!! msgId = " + msgId);
+
+                    GlobalCache.remove(msgId);
+
                 }else{
                     System.out.println("消息发送到Exchange失败!! msgId = " + msgId);
+
+
+                    Map map = (Map) GlobalCache.get(msgId);
+                    resentMapper.save(map);
+
                 }
             }
         };

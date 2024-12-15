@@ -50,7 +50,7 @@ public class RabbitTemplateConfig {
                     GlobalCache.remove(msgId);
 
                 }else{
-                    System.out.println("消息发送到Exchange失败!! msgId = " + msgId);
+                    log.error("消息发送到Exchange失败!! msgId = " + msgId);
 
 
                     Map map = (Map) GlobalCache.get(msgId);
